@@ -14,4 +14,5 @@ for (const key of crontabs) {
   await client.set(key, finalPrice, { EX: 60 * 60 });
 }
 
+// crontab -e
 // 0 * * * * /home/bigtogu/.nvm/versions/node/v21.6.2/bin/node /home/bigtogu/code/scraping_Ecommerce/crontab.js

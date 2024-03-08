@@ -3,6 +3,6 @@ import { getProductPrice } from "../controllers/index.js";
 
 const router = Router();
 
-router.get("/product-price", getProductPrice);
+router.post("/product-price", getProductPrice);
 
 export default router;

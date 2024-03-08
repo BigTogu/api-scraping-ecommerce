@@ -6,6 +6,7 @@ import {
 import { switchOn } from "../services/getProductPrice.js";
 
 export async function getProductPrice(req, res) {
+  console.log(req.body);
   const { productUrl } = req.body;
   const productSeller = productUrl.split(".")[1];
   const cachedPrice = await getKeyValue(productUrl);

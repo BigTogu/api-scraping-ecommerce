@@ -7,6 +7,10 @@ services:
       - "6379:6379"
     volumes:
       - cache:/data
+  cualquier-cosa:
+    build: .
+    ports:
+      - "4000:4000"
 
 volumes:
   cache:

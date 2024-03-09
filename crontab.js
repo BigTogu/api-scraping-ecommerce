@@ -1,5 +1,8 @@
 import { createClient } from "redis";
 import { switchOn } from "./src/services/getProductPrice.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 let client;
 

@@ -1,6 +1,9 @@
 import express from "express";
 import cors from "cors";
 import productRoutes from "./routes/priceProduct.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 

@@ -1,7 +1,19 @@
 import { createClient } from "redis";
 import { switchOn } from "./src/services/getProductPrice.js";
 
-const client = createClient();
+let client;
+
+if (process.env.NODE_ENV === "production") {
+  client = createClient({
+    url: process.env.REDIS_URL,
+    password: process.env.REDIS_PASSWORD,
+  });
+} else {
+  client = createClient({
+    url: process.env.REDIS_URL,
+  });
+}
+
 client.on("error", (err) => console.log("Redis Client Error", err));
 
 await client.connect();

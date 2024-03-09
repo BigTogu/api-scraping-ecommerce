@@ -1,5 +1,5 @@
 import { createClient } from "redis";
-import { switchOn } from "services/getProductPrice";
+import { switchOn } from "./src/services/getProductPrice.js";
 
 const client = createClient();
 client.on("error", (err) => console.log("Redis Client Error", err));
@@ -9,10 +9,12 @@ const crontabs = await client.keys("*-crontab");
 // make a for over all the keys
 for (const key of crontabs) {
   const productUrl = key.split("-crontab")[0];
+  console.log("Making request to:", productUrl);
   const productSeller = productUrl.split(".")[1];
+  console.log("Product Seller:", productSeller);
   const finalPrice = await switchOn(productSeller, productUrl);
-  await client.set(key, finalPrice, { EX: 60 * 60 });
+  await client.set(productUrl, finalPrice, { EX: 60 * 60 });
 }
-
+await client.quit();
 // crontab -e
 // 0 * * * * /home/bigtogu/.nvm/versions/node/v21.6.2/bin/node /home/bigtogu/code/scraping_Ecommerce/crontab.js

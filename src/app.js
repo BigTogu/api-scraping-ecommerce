@@ -2,8 +2,15 @@ import express from "express";
 import cors from "cors";
 import productRoutes from "./routes/priceProduct.js";
 import dotenv from "dotenv";
+import cron from "node-cron";
+import { updateLinkPriceInfo } from "../crontab.js";
 
 dotenv.config();
+
+cron.schedule("0 * * * *", function () {
+  console.log("running every hour at minute 0");
+  updateLinkPriceInfo();
+});
 
 const app = express();
 

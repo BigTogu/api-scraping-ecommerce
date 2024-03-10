@@ -74,11 +74,9 @@ export const getPriceFromUrl = async (
       return price;
     } catch (error) {
       console.error("Global: Error al obtener el precio del producto:", error);
-      await closeBrowser(browser);
       return null;
     }
   } catch (err) {
     console.error(err);
-    await closeBrowser(browser);
   }
 };

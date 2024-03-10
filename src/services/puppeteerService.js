@@ -73,5 +73,7 @@ export const getPriceFromUrl = async (
     return price;
   } catch (err) {
     console.error(err);
+    await page.screenshot({ path: "global_catch.png" });
+    await closeBrowser(browser);
   }
 };

@@ -6,7 +6,7 @@ const launchBrowser = async () => {
     return await puppeteer.launch({
       headless: false,
       defaultViewport: null,
-      args: ["--disable-notifications"],
+      args: ["--disable-notifications", "--no-sandbox"],
     });
   } catch (error) {
     console.error("Error al lanzar el navegador:", error);

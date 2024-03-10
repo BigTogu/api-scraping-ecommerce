@@ -43,15 +43,18 @@ export const getPriceFromUrl = async (
     await page.goto(productUrl);
 
     // Esperar a que el botón de denegar esté presente y hacer clic en él
+    await page.screenshot({ path: "before-click.png" });
     await page.waitForSelector(classNameDenyBtn, { visible: true });
     const form = await page.$(classNameDenyBtn);
     await form.evaluate((form) => form.click());
+    await page.screenshot({ path: "after-click.png" });
 
     // Esperar a que el selector de precio esté presente en la página
     await page.waitForSelector(classNamePriceSelector, {
       visible: true,
       timeout: 10000,
     });
+    await page.screenshot({ path: "info.png" });
 
     // Obtener el precio utilizando el selector proporcionado
     const price = await page.$eval(classNamePrice, (element) =>

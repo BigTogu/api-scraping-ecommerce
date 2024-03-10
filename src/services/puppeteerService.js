@@ -57,6 +57,7 @@ export const getPriceFromUrl = async (
     const price = await page.$eval(classNamePrice, (element) =>
       element ? element.innerText : null
     );
+    console.log(price, "--------price");
 
     await closeBrowser(browser);
 

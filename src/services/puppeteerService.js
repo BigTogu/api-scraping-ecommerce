@@ -5,7 +5,6 @@ const launchBrowser = async () => {
     console.log("Lanzando el navegador...");
     return await puppeteer.launch({
       headless: false,
-      product: "chrome",
       defaultViewport: null,
       args: [
         "--disable-notifications",

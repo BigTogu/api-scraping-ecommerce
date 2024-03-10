@@ -45,17 +45,25 @@ export const getPriceFromUrl = async (
     });
 
     await page.goto(productUrl);
+    let content = await page.content();
+    console.log(content, "--------content");
     try {
       try {
+        content = await page.content();
+        console.log(content, "--------content");
         await page.screenshot({ path: "locking.png" });
         await page.waitForSelector(classNameDenyBtn, {
           visible: true,
           timeout: 7000,
         });
+        content = await page.content();
+        console.log(content, "--------before click content");
         await page.screenshot({ path: "before-click.png" });
         const form = await page.$(classNameDenyBtn);
         await form.evaluate((form) => form.click());
         await page.screenshot({ path: "after-click.png" });
+        content = await page.content();
+        console.log(content, "--------after click content");
       } catch (error) {
         await page.screenshot({ path: "catch_error.png" });
         console.error("Error al hacer click en el botón de cookies:", error);

@@ -2,6 +2,7 @@ import puppeteer from "puppeteer";
 
 const launchBrowser = async () => {
   try {
+    console.log("Lanzando el navegador...");
     return await puppeteer.launch({ headless: true, args: ["--no-sandbox"] });
   } catch (error) {
     console.error("Error al lanzar el navegador:", error);

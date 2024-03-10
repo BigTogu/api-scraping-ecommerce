@@ -2,11 +2,7 @@ import puppeteer from "puppeteer";
 
 const launchBrowser = async () => {
   try {
-    return await puppeteer.launch({
-      headless: false,
-      defaultViewport: null,
-      args: ["--disable-notifications"],
-    });
+    return await puppeteer.launch({ headless: true, args: ["--no-sandbox"] });
   } catch (error) {
     console.error("Error al lanzar el navegador:", error);
     throw error;
@@ -49,7 +45,7 @@ export const getPriceFromUrl = async (
     // Esperar a que el selector de precio esté presente en la página
     await page.waitForSelector(classNamePriceSelector, {
       visible: true,
-      timeout: 30000,
+      timeout: 10000,
     });
 
     // Obtener el precio utilizando el selector proporcionado

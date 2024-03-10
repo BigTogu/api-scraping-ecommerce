@@ -7,7 +7,11 @@ const launchBrowser = async () => {
       headless: false,
       product: "chrome",
       defaultViewport: null,
-      args: ["--disable-notifications", "--no-sandbox"],
+      args: [
+        "--disable-notifications",
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+      ],
     });
   } catch (error) {
     console.error("Error al lanzar el navegador:", error);

@@ -14,7 +14,7 @@ const launchBrowser = async () => {
       headless: true,
       product: "chrome",
       defaultViewport: null,
-      timeout: 17000,
+      ignoreHTTPSErrors: true,
       args: [
         "--disable-notifications",
         "--no-sandbox",

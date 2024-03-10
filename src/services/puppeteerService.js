@@ -1,6 +1,7 @@
 import puppeteer from "puppeteer";
 
 function delay(time) {
+  console.log("Waiting for " + time + "ms");
   return new Promise(function (resolve) {
     setTimeout(resolve, time);
   });
@@ -10,7 +11,7 @@ const launchBrowser = async () => {
   try {
     console.log("Lanzando el navegador...");
     return await puppeteer.launch({
-      headless: true,
+      headless: false,
       defaultViewport: null,
       args: [
         "--disable-notifications",
@@ -48,7 +49,7 @@ export const getPriceFromUrl = async (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
       "Accept-Language": "en-US,en;q=0.9",
     });
-
+    await page.setJavaScriptEnabled(true);
     await page.goto(productUrl);
     let content = await page.content();
     console.log(content, "--------content");
@@ -57,11 +58,10 @@ export const getPriceFromUrl = async (
         content = await page.content();
         console.log(content, "--------starting content");
         await page.screenshot({ path: "locking.png" });
-        await page.setJavaScriptEnabled(true);
-        console.log("before waiting");
-        await delay(4000);
-        console.log("after waiting");
-        console.log("waiting 4 seconds");
+        await delay(7000);
+        console.log("waited 7 seconds...");
+        content = await page.content();
+        console.log(content, "--------content after waiting");
         await page.waitForSelector(classNameDenyBtn, {
           visible: true,
           timeout: 7000,

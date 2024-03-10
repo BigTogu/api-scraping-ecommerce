@@ -39,20 +39,26 @@ export const getPriceFromUrl = async (
       "Accept-Language": "en-US,en;q=0.9",
     });
 
-    // Navegar a la URL del producto
     await page.goto(productUrl);
 
-    // Esperar a que el botón de denegar esté presente y hacer clic en él
-    await page.screenshot({ path: "before-click.png" });
-    await page.waitForSelector(classNameDenyBtn, { visible: true });
-    const form = await page.$(classNameDenyBtn);
-    await form.evaluate((form) => form.click());
-    await page.screenshot({ path: "after-click.png" });
+    try {
+      await page.screenshot({ path: "before-click.png" });
+      await page.waitForSelector(classNameDenyBtn, {
+        visible: true,
+        timeout: 7000,
+      });
+      const form = await page.$(classNameDenyBtn);
+      await form.evaluate((form) => form.click());
+      await page.screenshot({ path: "after-click.png" });
+    } catch (error) {
+      await page.screenshot({ path: "catch_error.png" });
+      console.error("Error al hacer click en el botón de cookies:", error);
+    }
 
     // Esperar a que el selector de precio esté presente en la página
     await page.waitForSelector(classNamePriceSelector, {
       visible: true,
-      timeout: 10000,
+      timeout: 100,
     });
     await page.screenshot({ path: "info.png" });
 

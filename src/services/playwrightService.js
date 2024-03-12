@@ -12,7 +12,7 @@ export const getPriceFromUrl = async (
 
     await page.goto(productUrl);
 
-    await page.click(classNameDenyBtn);
+    // await page.click(classNameDenyBtn);
 
     // Get the updated HTML content after the navigation
     let html = await page.content();

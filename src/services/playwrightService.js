@@ -19,7 +19,7 @@ export const getPriceFromUrl = async (
     //   userAgent:
     //     userAgentStrings[Math.floor(Math.random() * userAgentStrings.length)],
     // });
-    const page = await context.newPage();
+    const page = await browser.newPage();
 
     await page.goto(productUrl);
     await page.screenshot({ path: "myntra.png", fullPage: true });

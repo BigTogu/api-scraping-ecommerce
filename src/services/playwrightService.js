@@ -9,16 +9,14 @@ export const getPriceFromUrl = async (
   try {
     const browser = await launchBrowser();
 
-    const context = await browser.newContext({
-      userAgent:
-        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36",
-    });
+    const context = await browser.newContext();
     const page = await context.newPage();
 
     await page.goto(productUrl);
     await page.screenshot({ path: "myntra.png", fullPage: true });
+    const randomDelay = Math.floor(Math.random() * 3000) + 1000; // Retraso aleatorio entre 1 y 4 segundos
+    await page.waitForTimeout(randomDelay);
     await page.click(classNameDenyBtn);
-
     // Get the updated HTML content after the navigation
     let html = await page.content();
 
@@ -38,7 +36,11 @@ export const getPriceFromUrl = async (
 const launchBrowser = async () => {
   try {
     console.log("Lanzando el navegador...");
-    return await playwright.chromium.launch({ headless: true });
+    return await playwright.chromium.launch({
+      headless: true,
+      userAgent:
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
+    });
   } catch (error) {
     console.error("Error al lanzar el navegador:", error);
     throw error;

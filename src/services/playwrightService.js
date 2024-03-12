@@ -11,7 +11,7 @@ export const getPriceFromUrl = async (
     const page = await browser.newPage();
 
     await page.goto(productUrl);
-
+    await page.screenshot({ path: "myntra.png", fullPage: true });
     await page.click(classNameDenyBtn);
 
     // Get the updated HTML content after the navigation

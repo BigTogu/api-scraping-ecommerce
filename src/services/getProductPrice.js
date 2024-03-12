@@ -1,4 +1,4 @@
-import { getPriceFromUrl } from "../services/puppeteerService.js";
+import { getPriceFromUrl } from "./playwrightService.js";
 
 const Selectors = {
   mediamarkt: {

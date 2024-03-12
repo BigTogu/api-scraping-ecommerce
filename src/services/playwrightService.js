@@ -13,10 +13,22 @@ export const getPriceFromUrl = async (
     const page = await context.newPage();
 
     await page.goto(productUrl);
+
+    await new Promise((resolve) =>
+      setTimeout(resolve, Math.floor(Math.random() * 4000 + 1000))
+    );
+
+    // Scroll the page to load additional content
+    await page.evaluate(() => window.scrollBy(0, window.innerHeight));
+
+    // Add another random delay of 1 to 5 seconds
+    await new Promise((resolve) =>
+      setTimeout(resolve, Math.floor(Math.random() * 4000 + 1000))
+    );
+
     await page.screenshot({ path: "myntra.png", fullPage: true });
-    const randomDelay = Math.floor(Math.random() * 3000) + 1000; // Retraso aleatorio entre 1 y 4 segundos
-    await page.waitForTimeout(randomDelay);
     await page.click(classNameDenyBtn);
+
     // Get the updated HTML content after the navigation
     let html = await page.content();
 

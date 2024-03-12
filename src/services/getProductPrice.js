@@ -3,19 +3,19 @@ import { getPriceFromUrl } from "../services/puppeteerService.js";
 const Selectors = {
   mediamarkt: {
     denyBtn: ".sc-4615157e-13.hPIYBS [data-test='pwa-consent-layer-deny-all']",
-    price: ".sc-a2b334e5-0",
+    price: "div.sc-a2b334e5-2",
   },
   elcorteingles: {
     denyBtn: "#onetrust-reject-all-handler",
-    price: ".product_detail-aside--price_color_selector",
+    price: "span.price-sale",
   },
   aliexpress: {
     denyBtn: ".btn-accept",
-    price: ".es--wrap--erdmPRe",
+    price: "div.product-price-current",
   },
   pccomponentes: {
     denyBtn: "#cookiesrejectAll",
-    price: "#pdp-price-current-integer",
+    price: "span#pdp-price-current-integer",
   },
 };
 
@@ -24,10 +24,8 @@ const getProductPrice = async (productUrl, selectors) => {
     const productPrice = await getPriceFromUrl(
       productUrl,
       selectors.denyBtn,
-      selectors.price,
       selectors.price
     );
-    console.log(productPrice, "--------productPrice");
     return productPrice;
   } catch (error) {
     console.error("Error al obtener el precio del producto:", error);
@@ -37,7 +35,6 @@ const getProductPrice = async (productUrl, selectors) => {
 
 export const switchOn = async (productSeller, productUrl) => {
   const selectors = Selectors[productSeller];
-
   if (!selectors) {
     console.error("Vendedor no válido:", productSeller);
     return null;

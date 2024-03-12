@@ -13,7 +13,6 @@ export const getPriceFromUrl = async (
     const page = await context.newPage();
 
     await page.goto(productUrl);
-    time.sleep(5);
     await page.screenshot({ path: "myntra.png", fullPage: true });
     await page.click(classNameDenyBtn);
 

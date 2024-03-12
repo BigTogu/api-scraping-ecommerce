@@ -1,5 +1,6 @@
 import playwright from "playwright";
 import * as cheerio from "cheerio";
+import * as stealth from "playwright-stealth";
 
 export const getPriceFromUrl = async (
   productUrl,
@@ -8,18 +9,12 @@ export const getPriceFromUrl = async (
 ) => {
   try {
     const browser = await launchBrowser();
-    // const userAgentStrings = [
-    //   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.2227.0 Safari/537.36",
-    //   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36",
-    //   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.3497.92 Safari/537.36",
-    //   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36",
-    // ];
-    // const context = await browser.newContext({
-    //   ignoreHTTPSErrors: true,
-    //   userAgent:
-    //     userAgentStrings[Math.floor(Math.random() * userAgentStrings.length)],
-    // });
-    const page = await browser.newPage();
+
+    const context = await browser.newContext();
+    const page = await context.newPage();
+
+    //stealh plugin
+    await stealth(page);
 
     await page.goto(productUrl);
     await page.screenshot({ path: "myntra.png", fullPage: true });

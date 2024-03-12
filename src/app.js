@@ -7,10 +7,10 @@ import { updateLinkPriceInfo } from "../crontab.js";
 
 dotenv.config();
 
-cron.schedule("0 * * * *", function () {
-  console.log("running every hour at minute 0");
-  updateLinkPriceInfo();
-});
+// cron.schedule("0 * * * *", function () {
+//   console.log("running every hour at minute 0");
+//   updateLinkPriceInfo();
+// });
 
 const app = express();
 

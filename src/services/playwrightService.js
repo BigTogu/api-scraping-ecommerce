@@ -27,6 +27,8 @@ export const getPriceFromUrl = async (
     );
 
     await page.screenshot({ path: "myntra.png", fullPage: true });
+    let htmlVerify = await page.content();
+    console.log(htmlVerify, "-----------------");
     await page.click(classNameDenyBtn);
 
     // Get the updated HTML content after the navigation

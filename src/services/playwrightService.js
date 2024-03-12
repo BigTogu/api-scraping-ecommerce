@@ -1,6 +1,5 @@
 import playwright from "playwright";
 import * as cheerio from "cheerio";
-import * as stealth from "playwright-stealth";
 
 export const getPriceFromUrl = async (
   productUrl,
@@ -12,9 +11,6 @@ export const getPriceFromUrl = async (
 
     const context = await browser.newContext();
     const page = await context.newPage();
-
-    //stealh plugin
-    await stealth(page);
 
     await page.goto(productUrl);
     await page.screenshot({ path: "myntra.png", fullPage: true });

@@ -33,7 +33,7 @@ export const getPriceFromUrl = async (
 const launchBrowser = async () => {
   try {
     console.log("Lanzando el navegador...");
-    return await playwright.chromium.launch({ headless: false });
+    return await playwright.chromium.launch({ headless: true });
   } catch (error) {
     console.error("Error al lanzar el navegador:", error);
     throw error;

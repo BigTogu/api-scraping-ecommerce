@@ -8,7 +8,8 @@ export const getPriceFromUrl = async (
 ) => {
   try {
     const browser = await launchBrowser();
-    const page = await browser.newPage();
+    const context = await browser.newContext({ gnoreHTTPSErrors: true });
+    const page = await context.newPage();
 
     await page.goto(productUrl);
     await page.screenshot({ path: "myntra.png", fullPage: true });

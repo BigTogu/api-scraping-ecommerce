@@ -7,7 +7,7 @@ const Selectors = {
   },
   elcorteingles: {
     denyBtn: "#onetrust-reject-all-handler",
-    price: "span.price-sale",
+    price: "span.price-unit--normal",
   },
   aliexpress: {
     denyBtn: ".btn-accept",

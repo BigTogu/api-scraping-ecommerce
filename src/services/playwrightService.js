@@ -9,7 +9,14 @@ export const getPriceFromUrl = async (
   try {
     const browser = await launchBrowser();
 
-    const context = await browser.newContext();
+    const context = await browser.newContext({
+      ignoreHTTPSErrors: true,
+      userAgent: "Chrome/94.0.4606.81",
+      extraHTTPHeaders: {
+        accept:
+          "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+      },
+    });
     const page = await context.newPage();
 
     await page.goto(productUrl);
@@ -35,7 +42,7 @@ export const getPriceFromUrl = async (
 const launchBrowser = async () => {
   try {
     console.log("Lanzando el navegador...");
-    return await playwright.firefox.launch({
+    return await playwright.chromium.launch({
       headless: true,
       slowMo: 300,
     });

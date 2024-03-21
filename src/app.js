@@ -23,6 +23,7 @@ app.set("json spaces", 2);
 app.use(cors({ origin: process.env.WEB_APPLICATION_CORS_ORIGIN }));
 app.use(express.json());
 
+// routes
 app.use(productRoutes);
 
 app.listen(PORT, () => {

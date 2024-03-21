@@ -1,5 +1,6 @@
 import { getPriceFromUrl } from "./playwrightService.js";
 
+// Define un objeto Selectors que contiene los selectores CSS para diferentes vendedores
 const Selectors = {
   mediamarkt: {
     denyBtn: ".sc-4615157e-13.hPIYBS [data-test='pwa-consent-layer-deny-all']",
@@ -19,6 +20,7 @@ const Selectors = {
   },
 };
 
+// Función para obtener el precio del producto
 const getProductPrice = async (productUrl, selectors) => {
   try {
     const productPrice = await getPriceFromUrl(
@@ -33,13 +35,17 @@ const getProductPrice = async (productUrl, selectors) => {
   }
 };
 
+// Función principal que selecciona el vendedor y obtiene el precio del producto
 export const switchOn = async (productSeller, productUrl) => {
+  // Obtiene los selectores para el vendedor proporcionado
   const selectors = Selectors[productSeller];
+
   if (!selectors) {
     console.error("Vendedor no válido:", productSeller);
     return null;
   }
 
+  // Obtiene el precio del producto del vendedor proporcionado
   switch (productSeller) {
     case "mediamarkt":
       return getProductPrice(productUrl, selectors);

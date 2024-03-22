@@ -3,7 +3,7 @@ import {
   setKeyValueCrontab,
   getKeyValue,
 } from "../utils/redis.js";
-import { switchOn } from "../services/getProductPrice.js";
+import { fetchProductPriceFromSeller } from "../services/getProductPrice.js";
 
 export async function getProductPrice(req, res) {
   const { productUrl } = req.body;
@@ -23,7 +23,10 @@ export async function getProductPrice(req, res) {
   }
 
   // Si el precio no está almacenado en Redis, lo busca en la web con el scraping
-  const finalPrice = await switchOn(productSeller, productUrl);
+  const finalPrice = await fetchProductPriceFromSeller(
+    productSeller,
+    productUrl
+  );
   if (!finalPrice) {
     return res.json({ productSeller: "not found" });
   }

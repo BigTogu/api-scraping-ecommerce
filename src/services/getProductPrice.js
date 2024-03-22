@@ -21,7 +21,7 @@ const Selectors = {
 };
 
 // Función para obtener el precio del producto
-const getProductPrice = async (productUrl, selectors) => {
+const fetchProductPrice = async (productUrl, selectors) => {
   try {
     const productPrice = await getPriceFromUrl(
       productUrl,
@@ -36,7 +36,10 @@ const getProductPrice = async (productUrl, selectors) => {
 };
 
 // Función principal que selecciona el vendedor y obtiene el precio del producto
-export const switchOn = async (productSeller, productUrl) => {
+export const fetchProductPriceFromSeller = async (
+  productSeller,
+  productUrl
+) => {
   // Obtiene los selectores para el vendedor proporcionado
   const selectors = Selectors[productSeller];
 
@@ -48,12 +51,10 @@ export const switchOn = async (productSeller, productUrl) => {
   // Obtiene el precio del producto del vendedor proporcionado
   switch (productSeller) {
     case "mediamarkt":
-      return getProductPrice(productUrl, selectors);
-
     case "elcorteingles":
     case "aliexpress":
     case "pccomponentes":
-      return getProductPrice(productUrl, selectors);
+      return fetchProductPrice(productUrl, selectors);
 
     default:
       return null;

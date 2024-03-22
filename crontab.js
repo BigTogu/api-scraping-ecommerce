@@ -1,5 +1,5 @@
 import { createClient } from "redis";
-import { switchOn } from "./src/services/getProductPrice.js";
+import { fetchProductPriceFromSeller } from "./src/services/getProductPrice.js";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -37,7 +37,10 @@ export async function updateLinkPriceInfo() {
     console.log("Product Seller:", productSeller);
 
     // Obtiene el precio final del producto
-    const finalPrice = await switchOn(productSeller, productUrl);
+    const finalPrice = await fetchProductPriceFromSeller(
+      productSeller,
+      productUrl
+    );
 
     if (!finalPrice) {
       console.error("Error getting price for:", productUrl);
@@ -49,5 +52,3 @@ export async function updateLinkPriceInfo() {
   }
   await client.quit();
 }
-
-// 0 * * * * /home/bigtogu/.nvm/versions/node/v21.6.2/bin/node /home/bigtogu/code/scraping_Ecommerce/crontab.js
